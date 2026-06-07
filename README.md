@@ -1,49 +1,56 @@
 # BP Mods Registry
 
-Index automatique des mods Broke Protocol compatibles avec **ModLoader**.
+Auto-generated index of mods compatible with the **BrokeProtocol ModLoader**.
 
-## Pour les joueurs
+## For players
 
-Ouvre le menu **MODS** dans le jeu → onglet **Disponibles**. Tout y est, rien à installer manuellement.
+Open the **MODS** menu in-game → **Available** tab. Everything is there, no
+manual install needed.
 
-L'index est servi depuis GitHub Pages :
+The index is served from GitHub Pages:
 
 ```
 https://expected333.github.io/BP-Mods-Registry/index.json
 ```
 
-## Pour les modders — publier un mod
+## For modders — publishing a mod
 
-Tu n'as **rien à modifier ici**. Il te suffit de :
+You **don't need to modify anything in this repo**. Just:
 
-1. **Créer un repo GitHub public** pour ton mod.
-2. À la racine, mettre un fichier **`mod.json`** ([schéma](schema/mod.schema.json), [exemple](examples/example-mod.json)) :
+1. **Create a public GitHub repo** for your mod.
+2. At the repo root, add a **`mod.json`** ([schema](schema/mod.schema.json),
+   [example](examples/example-mod.json)):
    ```json
    {
-     "name": "MonMod",
+     "name": "MyMod",
      "version": "1.0.0",
-     "author": "TonPseudo",
-     "description": "Description courte de ce que fait le mod.",
-     "dll_asset_pattern": "MonMod.dll",
+     "author": "YourHandle",
+     "description": "Short description of what the mod does.",
+     "dll_asset_pattern": "MyMod.dll",
      "dependencies": [],
      "min_modloader_version": "1.0.0",
-     "homepage": "https://github.com/TonPseudo/MonMod"
+     "homepage": "https://github.com/YourHandle/MyMod"
    }
    ```
-3. **Tagger le repo avec le topic `brokeprotocol-mod`** (bouton ⚙ "About" sur la page du repo → Topics).
-4. **Publier une GitHub Release** dont les assets contiennent ton `.dll` (le nom doit matcher `dll_asset_pattern`).
+3. **Tag the repo with the topic `brokeprotocol-mod`** (⚙ "About" button on
+   the repo page → Topics).
+4. **Publish a GitHub Release** whose assets contain your `.dll` (its filename
+   must match `dll_asset_pattern`).
 
-Et c'est tout. L'index est régénéré **toutes les heures**, ton mod apparaîtra dans le menu en jeu.
+That's it. The index is regenerated **hourly**, your mod will appear in the
+in-game menu shortly after.
 
-### Pour mettre à jour ton mod
+### Updating your mod
 
-Publie une nouvelle release. Le `version` de ton `mod.json` sera mis à jour, et le ModLoader proposera la mise à jour aux joueurs qui ont déjà la version précédente.
+Publish a new Release. The `version` from your `mod.json` will be picked up,
+and ModLoader will offer the update to players who already have the previous
+version.
 
-## Comment ça marche en interne
+## How it works internally
 
 ```
                 ┌────────────────────────────────────────┐
-                │  Repos taggés `brokeprotocol-mod`      │
+                │  Repos tagged `brokeprotocol-mod`      │
                 │  ── mod.json                           │
                 │  ── GitHub Release ── *.dll            │
                 └──────────────────┬─────────────────────┘
@@ -52,28 +59,31 @@ Publie une nouvelle release. Le `version` de ton `mod.json` sera mis à jour, et
                                    │
                                    ▼
                 ┌────────────────────────────────────────┐
-                │  GitHub Action (cron horaire)          │
+                │  GitHub Action (hourly cron)           │
                 │  scripts/build-index.js                │
-                │  → calcule SHA256 de chaque DLL        │
-                │  → génère index.json                   │
+                │  → SHA256 each DLL                     │
+                │  → generate index.json                 │
                 └──────────────────┬─────────────────────┘
                                    │
                                    ▼
                 ┌────────────────────────────────────────┐
-                │  GitHub Pages : index.json (public)    │
+                │  GitHub Pages: index.json (public)     │
                 └──────────────────┬─────────────────────┘
                                    │
                                    ▼
                 ┌────────────────────────────────────────┐
-                │  ModLoader (en jeu)                    │
-                │  fetch → onglet "Disponibles"          │
+                │  ModLoader (in-game)                   │
+                │  fetch → "Available" tab               │
                 └────────────────────────────────────────┘
 ```
 
-## Modération
+## Moderation
 
-Si un mod publié est malveillant / spam / illégal, ouvre une [issue](../../issues/new) avec le tag `report`. Le mod sera ajouté à la **blocklist** dans `.github/blocklist.txt` (une ligne = un repo URL) et exclu de l'index au prochain build.
+If a published mod is malicious / spam / illegal, open an
+[issue](../../issues/new) tagged `report`. The mod will be added to the
+**blocklist** in `.github/blocklist.txt` (one repo URL per line) and excluded
+from the next index build.
 
 ## License
 
-MIT pour ce registry. Chaque mod a sa propre license, vérifie sur le repo du mod.
+MIT for this registry. Each mod ships its own license — check the mod's repo.
