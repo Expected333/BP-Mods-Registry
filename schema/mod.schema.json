@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Expected333/BP-Mods-Registry/schema/mod.schema.json",
+  "title": "BrokeProtocol Mod Manifest",
+  "description": "Manifest à placer à la racine d'un repo de mod (mod.json).",
+  "type": "object",
+  "required": ["name", "version", "author", "dll_asset_pattern"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nom du mod, doit correspondre à IMod.ModName.",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "version": {
+      "type": "string",
+      "description": "SemVer X.Y.Z.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.]+)?$"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "dll_asset_pattern": {
+      "type": "string",
+      "description": "Nom (ou glob simple) du .dll dans les assets de la release. Ex: 'MyMod.dll'.",
+      "pattern": ".+\\.dll$"
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Noms de mods requis (matchent les `name` d'autres mods de l'index).",
+      "items": { "type": "string" }
+    },
+    "min_modloader_version": {
+      "type": "string",
+      "description": "Version minimale du ModLoader requise.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 32 },
+      "maxItems": 10
+    }
+  }
+}

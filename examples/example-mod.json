@@ -1,0 +1,11 @@
+{
+  "name": "WorldBuilderCoop",
+  "version": "1.0.0",
+  "author": "Zefire",
+  "description": "Ajoute le multijoueur coopératif dans le World Builder.",
+  "dll_asset_pattern": "WorldBuilderCoop.dll",
+  "dependencies": [],
+  "min_modloader_version": "1.0.0",
+  "homepage": "https://github.com/Zefire/WorldBuilderCoop",
+  "tags": ["multiplayer", "builder", "coop"]
+}

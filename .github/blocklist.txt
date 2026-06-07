@@ -1,0 +1,6 @@
+# Une URL de repo GitHub par ligne (sans trailing slash).
+# Les repos listés ici seront exclus de l'index même s'ils ont le topic brokeprotocol-mod.
+# Les lignes commençant par # sont ignorées.
+#
+# Exemple :
+# https://github.com/SpammerUser/SuspiciousMod
