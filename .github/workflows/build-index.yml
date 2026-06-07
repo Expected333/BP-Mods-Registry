@@ -2,7 +2,7 @@ name: Build registry index
 
 on:
   schedule:
-    - cron: "0 * * * *"   # toutes les heures
+    - cron: "*/15 * * * *"   # toutes les 15 min (filet ; le déclenchement instantané passe par REGISTRY_DISPATCH_TOKEN côté repos de mods)
   workflow_dispatch:       # bouton manuel
   push:
     branches: [main]
